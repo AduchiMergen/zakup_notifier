@@ -70,11 +70,9 @@ class Product(AbstractDateRegModel):
             max_length=80, verbose_name='name and code'
         )
     )
-    okpd2 = ArrayField(
-        models.CharField(
-            max_length=80, verbose_name='name and code'
-        )
-    )
+    okpd2 = models.CharField(max_length=80, verbose_name='okpd2 code')
+    okpd2_name = models.CharField(max_length=80, verbose_name='okpd2 name')
+
     quantity = models.PositiveIntegerField(
         default=0, verbose_name='quantity'
     )
@@ -211,8 +209,7 @@ class Contract(AbstractDateRegModel):
     @property
     def tg_data(self):
         return {
-            'price': self.meta_data['products']['price'],
-            'name': self.meta_data['products']['name'],
-            'customer': self.meta_data['customer']['fullName'],
-            'url': self.meta_data['printFormUrl'],
+            'price': self.price,
+            'customer': self.customer.name,
+            'url': self.form,
         }

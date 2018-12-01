@@ -1,6 +1,5 @@
 {{ date }}
 {% for contract in contracts %}
-    название: {{ contract.name }}
     покупатель {{ contract.customer }}
     цена: {{ contract.price }}
     ссылка: {{ contract. url }}

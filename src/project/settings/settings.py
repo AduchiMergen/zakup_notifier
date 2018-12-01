@@ -35,12 +35,14 @@ DJANGO_APPS = [
 EXTERNAL_LIBS = [
     'django_extensions',
 
-    'apps.telegram',
 ]
 
 OWN_APPS = [
     'apps.core',
     'apps.contracts',
+    'apps.scoring',
+    'apps.telegram',
+
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_LIBS + OWN_APPS
