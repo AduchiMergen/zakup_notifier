@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_extensions',
+
+    'apps.telegram',
 ]
 
 MIDDLEWARE = [
@@ -116,3 +118,6 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
 STATIC_URL = '/static/'
+
+TELEGRAM_TOKEN = '556053359:AAGpyQZPu6RSwBfs5YjxNpykOO6PivhqHb0'
+TELEGRAM_CHAT_ID = '874520'

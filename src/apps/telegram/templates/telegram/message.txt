@@ -1,0 +1,4 @@
+{{ date }}
+{% for contract in contracts %}
+    {{ contract.name }}
+{% endfor %}
