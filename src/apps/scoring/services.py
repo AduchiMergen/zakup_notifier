@@ -7,11 +7,11 @@ from apps.scoring.models import ProductOkpd2Score
 def score(contract: Contract):
     score = 0
     try:
-        score += contract.customer.customerscore.score
+        score += contract.customer.customerscore.score or 1
     except:
         pass
 
     score += ProductOkpd2Score.objects.filter(
         okpd2__in=contract.products.values_list('okpd2', flat=True)
-    ).aggregate(score=Sum('score')).get('score')
+    ).aggregate(score=Sum('score')).get('score') or 0
     return score
