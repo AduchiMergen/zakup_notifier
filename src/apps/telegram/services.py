@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 
 def send_contracts_to_telegram(contracts, gateway):
     context = {
-        'data': date.today(),
+        'date': date.today(),
         'contracts': (contract.tg_data for contract in contracts),
     }
     message = render_to_string(template_name='telegram/message.txt', context=context)
