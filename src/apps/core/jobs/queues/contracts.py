@@ -13,6 +13,12 @@ from .send_to_tg import send_contracts
 PAGE_SIZE = 50
 
 
+def normalize_date(date):
+    if not date:
+        return None
+    return date[:10]
+
+
 def get_or_create_customer(customer: dict):
     inn = customer.get('inn',)
     kpp = customer.get('kpp', 0)
@@ -108,11 +114,11 @@ def parse_contracts(date_from=datetime.utcnow()):
                 'form': contract.get('printFormUrl', ''),
                 'ext_mongo_id': contract.get('mongo_id'),
                 'region_code': contract.get('regionCode'),
-                'publish_date': contract.get('publishDate'),
                 'contract_url': contract.get('contractUrl'),
-                'sign_date': contract.get('signDate')[:10],
-                'protocol_date': contract.get('protocolDate'),
                 'description': contract.get('documentBase', ''),
+                'sign_date': normalize_date(contract.get('signDate')),
+                'publish_date': normalize_date(contract.get('publishDate')),
+                'protocol_date': normalize_date(contract.get('protocolDate')),
             }
             item.update({
                 'customer': get_or_create_customer(contract.get('customer', {}))

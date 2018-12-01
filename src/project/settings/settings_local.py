@@ -4,11 +4,11 @@ DEBUG = False
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'zakupki_notifier',
         'HOST': '127.0.0.1',
         'PORT': 5432,
-        'USER': 'django',
-        'PASSWORD': 'django'
+        'USER': 'artem',
+        'PASSWORD': '405b9c'
     }
 }
