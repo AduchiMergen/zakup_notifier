@@ -15,7 +15,8 @@ class AbstractDateRegModel(models.Model):
         verbose_name='Date updated'
     )
     reg_number = models.CharField(
-        max_length=40, unique=True
+        max_length=40, db_index=True,
+        blank=True, null=True
     )
 
     class Meta:

@@ -26,6 +26,7 @@ ALLOWED_HOSTS = []
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.gis',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -42,7 +43,6 @@ OWN_APPS = [
     'apps.contracts',
     'apps.scoring',
     'apps.telegram',
-
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_LIBS + OWN_APPS

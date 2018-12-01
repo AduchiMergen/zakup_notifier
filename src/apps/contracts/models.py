@@ -1,35 +1,44 @@
-from django.contrib.gis.geos import Point
-from django.db import models
-from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.fields import (
+    GenericRelation, GenericForeignKey
+)
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.gis.db.models import PointField
 from django.contrib.postgres.fields import (
     JSONField, DateRangeField, ArrayField
 )
+from django.db import models
 
+from apps.core.enums import StageTypes, CurrencyTypes
 from apps.core.models import (
     AbstractDateRegModel, File, PaymentDocument
 )
-from apps.core.enums import StageTypes, CurrencyTypes
 from apps.core.utils import get_coordinates
 
 
 class Customer(AbstractDateRegModel):
-    kpp = models.IntegerField(
-        verbose_name='kpp'
+    kpp = models.BigIntegerField(
+        verbose_name='kpp',
     )
-    inn = models.IntegerField(
+    inn = models.BigIntegerField(
         verbose_name='inn'
     )
     name = models.TextField(
         verbose_name='description'
     )
     address = models.CharField(
-        max_length=255, verbose_name='address'
+        max_length=255,
+        blank=True, null=True,
+        verbose_name='address'
     )
-    geometry = Point()
+    geometry = PointField(
+        blank=True, null=True,
+        verbose_name='geometry location'
+    )
 
     def save(self, **kwargs):
+        if self.address:
+            self.geometry = get_coordinates(self.address)
         super().save(**kwargs)
-        self.geometry = get_coordinates(self.address)
 
     def __str__(self):
         return self.name
@@ -81,6 +90,15 @@ class Product(AbstractDateRegModel):
         verbose_name='price'
     )
 
+    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE
+    )
+    content_object = GenericForeignKey(
+        'content_type', 'object_id'
+    )
+
     def __str__(self):
         return self.name
 
@@ -123,7 +141,8 @@ class Contract(AbstractDateRegModel):
         verbose_name='sign date'
     )
     protocol_date = models.DateField(
-        verbose_name='protocol date'
+        verbose_name='protocol date',
+        blank=True, null=True
     )
 
     attachments = GenericRelation(
@@ -138,7 +157,8 @@ class Contract(AbstractDateRegModel):
     )
     execution = models.ForeignKey(
         Execution, on_delete=models.CASCADE,
-        related_name='contracts'
+        related_name='contracts',
+        blank=True, null=True
     )
     customer = models.ForeignKey(
         Customer, on_delete=models.SET_NULL,
@@ -167,7 +187,7 @@ class Contract(AbstractDateRegModel):
     )
 
     number = models.CharField(
-        max_length=20,
+        max_length=80,
         verbose_name='number document'
     )
     description = models.TextField(
@@ -179,8 +199,8 @@ class Contract(AbstractDateRegModel):
         db_index=True,
         verbose_name='ext provider id'
     )
-    ext_mongo_id = models.UUIDField(
-        unique=True,
+    ext_mongo_id = models.CharField(
+        unique=True, max_length=80,
         verbose_name='external mongo_id',
     )
     fz = models.PositiveSmallIntegerField(
@@ -193,6 +213,7 @@ class Contract(AbstractDateRegModel):
         default=False
     )
     execution_dt = DateRangeField(
+        blank=True, null=True,
         verbose_name='Date start and end'
     )
 
