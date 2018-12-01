@@ -19,5 +19,4 @@ class TelegramGateway(object):
             )
 
     def send_message(self, chat_id: int, message: str):
-        self.updater.bot.send_message(chat_id=chat_id, text=message, timeout=50,
-                                      parse_mode='Markdown')
+        self.updater.bot.send_message(chat_id=chat_id, text=message, timeout=50)

@@ -81,7 +81,7 @@ def get_urls(url, request_params):
     return pages
 
 
-def parse_contracts(date_from=datetime.utcnow()):
+def parse_contracts(date_from=datetime.utcnow(), send=True):
     bulk_items = []
     params = {
         'sort': '-signDate',
@@ -129,5 +129,6 @@ def parse_contracts(date_from=datetime.utcnow()):
         bulk_items, batch_size=PAGE_SIZE
     )
 
-    enqueue(send_contracts, contract_items)
+    if send:
+        enqueue(send_contracts, contract_items)
     # enqueue(extend_contract, contract_items)

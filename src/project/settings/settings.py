@@ -102,3 +102,14 @@ TELEGRAM_CHAT_ID = '874520'
 CLEARSPENDING_URL = 'http://openapi.clearspending.ru/restapi/v3/'
 
 SCORE = 0
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        'PASSWORD': 'some-password',
+        'DEFAULT_TIMEOUT': 360,
+        'ASYNC': False,
+    }
+}

@@ -183,7 +183,8 @@ class Contract(AbstractDateRegModel):
         verbose_name='region code'
     )
     contract_url = models.URLField(
-        verbose_name='contract url'
+        verbose_name='contract url',
+        null=True,
     )
 
     number = models.CharField(
@@ -195,7 +196,8 @@ class Contract(AbstractDateRegModel):
         help_text='documentBase field in API'
     )
 
-    provider_id = models.BigIntegerField(
+    provider_id = models.CharField(
+        max_length=100,
         db_index=True,
         verbose_name='ext provider id'
     )
