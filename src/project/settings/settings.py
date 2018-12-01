@@ -35,7 +35,6 @@ DJANGO_APPS = [
 
 EXTERNAL_LIBS = [
     'django_extensions',
-
 ]
 
 OWN_APPS = [

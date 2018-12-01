@@ -2,6 +2,6 @@
 {% for contract in contracts %}
     покупатель {{ contract.customer }}
     цена: {{ contract.price }}
-    ссылка: {{ contract. url }}
+    ссылка: {{ contract.url }}
 
 {% endfor %}

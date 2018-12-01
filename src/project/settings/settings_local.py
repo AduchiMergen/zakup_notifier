@@ -8,6 +8,7 @@ DATABASES = {
         'NAME': 'zakupki_notifier',
         'HOST': '127.0.0.1',
         'PORT': 5432,
-        'PASSWORD': '405b9c'
+        'USER': 'django',
+        'PASSWORD': 'django'
     }
 }
