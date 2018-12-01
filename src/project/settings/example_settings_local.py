@@ -12,3 +12,13 @@ DATABASES = {
         'PASSWORD': 'django'
     }
 }
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'ASYNC': False,
+        'DB': 3,
+        'DEFAULT_TIMEOUT': 360,
+    }
+}
