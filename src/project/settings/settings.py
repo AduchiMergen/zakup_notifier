@@ -99,3 +99,5 @@ TELEGRAM_TOKEN = '556053359:AAGpyQZPu6RSwBfs5YjxNpykOO6PivhqHb0'
 TELEGRAM_CHAT_ID = '874520'
 
 CLEARSPENDING_URL = 'http://openapi.clearspending.ru/restapi/v3/'
+
+SCORE = 0

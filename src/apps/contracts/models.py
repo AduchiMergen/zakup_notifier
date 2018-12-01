@@ -18,3 +18,12 @@ class Contract(AbstractDateTimeModel):
         ordering = ['-price']
         verbose_name = 'Contract'
         verbose_name_plural = 'Contracts'
+
+    @property
+    def tg_data(self):
+        return {
+            'price': self.meta_data['products']['price'],
+            'name': self.meta_data['products']['name'],
+            'customer': self.meta_data['customer']['fullName'],
+            'url': self.meta_data['printFormUrl'],
+        }

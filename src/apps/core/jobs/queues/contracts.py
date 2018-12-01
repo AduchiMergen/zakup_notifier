@@ -1,8 +1,11 @@
 from datetime import datetime
 from urllib.parse import urljoin, urlencode
 
+import django_rq
 import requests
 from django.conf import settings
+
+from apps.core.jobs.queues.send_to_tg import send_contracts
 
 
 def parse_contracts(date_from=datetime.utcnow()):
@@ -20,5 +23,5 @@ def parse_contracts(date_from=datetime.utcnow()):
     total = contracts.get('total')
     data_list = contracts.get('data', [])
 
-
+    django_rq.enqueue(send_contracts, contracts=[])
     return None
