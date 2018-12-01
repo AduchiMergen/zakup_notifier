@@ -34,6 +34,7 @@ DJANGO_APPS = [
 ]
 
 EXTERNAL_LIBS = [
+    'django_rq',
     'django_extensions',
 ]
 
