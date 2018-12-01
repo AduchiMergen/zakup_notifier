@@ -1,1 +1,1 @@
-default_app_config = 'apps.contracts.apps.CoreConfig'
+default_app_config = 'apps.contracts.apps.ContractsConfig'

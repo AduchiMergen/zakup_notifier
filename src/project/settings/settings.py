@@ -37,8 +37,8 @@ EXTERNAL_LIBS = [
 ]
 
 OWN_APPS = [
-    'core',
-    'contracts',
+    'apps.core',
+    'apps.contracts',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_LIBS + OWN_APPS
