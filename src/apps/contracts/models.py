@@ -138,6 +138,9 @@ class Contract(AbstractDateRegModel):
     products = GenericRelation(
         Product, related_name='contracts'
     )
+    executions = GenericRelation(
+        Execution, related_name='contracts'
+    )
     customer = models.ForeignKey(
         Customer, on_delete=models.SET_NULL,
         verbose_name='customer of contract',
